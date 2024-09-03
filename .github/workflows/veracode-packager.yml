@@ -1,0 +1,26 @@
+name: Veracode JavaScript Packager
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Veracode JavaScript Packager
+      run: npx veracode-javascript-packager --dir ./src --output ./verascan
